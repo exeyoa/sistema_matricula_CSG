@@ -34,18 +34,25 @@
                 return true;
             }
 
-            function update() {
-                var ok = armar();
-                setInvalid(!ok);
+            function onChange() {
+                armar();
+                if (container.classList.contains('invalid')) {
+                    var prov  = selectProv.value;
+                    var tipo  = selectTipo.value;
+                    var libro = inputLibro.value.trim();
+                    var tomo  = inputTomo.value.trim();
+                    var ok = (prov !== '00' || tipo !== '00') && libro !== '' && tomo !== '';
+                    if (ok) setInvalid(false);
+                }
             }
 
             [selectProv, selectTipo].forEach(function (el) {
-                el.addEventListener('change', update);
+                el.addEventListener('change', onChange);
             });
             [inputLibro, inputTomo].forEach(function (el) {
                 el.addEventListener('input', function () {
                     el.value = el.value.replace(/\D/g, '').slice(0, 5);
-                    update();
+                    onChange();
                 });
             });
 
