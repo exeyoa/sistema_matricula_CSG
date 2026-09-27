@@ -1,0 +1,58 @@
+# =====================================================================
+# SISTEMA DE MATRÍCULA - Colegio Secundario de Guabito
+# =====================================================================
+
+# --- PHP / Servidor ---------------------------------------------------
+# Errores: NO loguear errores en producción (quítalo en InfinityFree)
+# En desarrollo local se ven en pantalla para depurar.
+
+# --- Configuración local (credenciales y logs) ------------------------
+/config/credenciales.php
+
+# --- Uploads: nunca subir archivos de usuarios al repo ---------------
+/uploads/perfiles/*
+/uploads/perfiles/.*  # incluye archivos ocultos tipo .DS_Store
+!/uploads/perfiles/.gitkeep
+/uploads/documentos/*
+/uploads/documentos/.*  # incluye archivos ocultos tipo .DS_Store
+!/uploads/documentos/.gitkeep
+
+# --- Archivos temporales / caché --------------------------------------
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
+
+# --- Sistema ----------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+$RECYCLE.BIN/
+
+# --- Editores ---------------------------------------------------------
+.idea/
+.vscode/
+*.iml
+.project
+.settings/
+
+# --- Entornos / dependencias -----------------------------------------
+/vendor/
+/node_modules/
+composer.lock
+package-lock.json
+yarn.lock
+
+# --- Entornos virtuales de PHP (si alguien usa) -----------------------
+/.venv/
+/vendor/
+
+# --- Archivos de caché de PHP ----------------------------------------
+/tmp/
+/cache/
+
+# --- Exportar a PDF / reportes generados ------------------------------
+/exports/
