@@ -275,6 +275,13 @@ CREATE TABLE solicitud_reseteo(
         ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+CREATE TABLE intentos_activacion(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    ip VARCHAR(45) NOT NULL,
+    fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_intentos_act_ip_fecha (ip, fecha)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 -- ---------------------------------------------------------------------
 -- Datos iniciales
 -- ---------------------------------------------------------------------

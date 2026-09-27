@@ -212,6 +212,21 @@ body {
     text-decoration: underline;
 }
 
+.login-extra-2 {
+    margin-top: 0.75rem;
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+.login-extra-2 a {
+    color: #1a8cb8;
+    text-decoration: none;
+}
+
+.login-extra-2 a:hover {
+    text-decoration: underline;
+}
+
 .alert {
     border-radius: 8px;
     font-size: 0.9rem;

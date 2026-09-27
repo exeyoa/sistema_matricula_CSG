@@ -1,18 +1,18 @@
 (function () {
-    var pwd   = document.getElementById('contrasena');
-    var btn   = document.querySelector('.toggle-password');
-    var icon  = btn ? btn.querySelector('i') : null;
+    document.querySelectorAll('.toggle-password').forEach(function (btn) {
+        var input = btn.parentElement && btn.parentElement.querySelector('input[type="password"], input[type="text"]');
+        var icon  = btn.querySelector('i');
+        if (!input || !icon) return;
 
-    if (pwd && btn && icon) {
         btn.addEventListener('click', function () {
-            var showing = pwd.type === 'text';
-            pwd.type = showing ? 'password' : 'text';
+            var showing = input.type === 'text';
+            input.type = showing ? 'password' : 'text';
             icon.classList.toggle('bi-eye-fill', showing);
             icon.classList.toggle('bi-eye-slash-fill', !showing);
             btn.setAttribute('aria-label', showing ? 'Mostrar contrasena' : 'Ocultar contrasena');
-            pwd.focus();
+            input.focus();
         });
-    }
+    });
 
     var slides = document.querySelectorAll('.carrusel-slide');
     var dots   = document.querySelectorAll('.carrusel-dots .dot');

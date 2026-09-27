@@ -6,6 +6,7 @@ if (auth_user()) {
 }
 
 $error    = flash_get('login_error') ?? '';
+$ok       = '';
 $motivo   = $_GET['motivo'] ?? '';
 $cedulaOld = $_POST['cedula'] ?? '';
 
@@ -15,6 +16,10 @@ if ($motivo === 'inactividad') {
     $error = 'No tienes permiso para acceder a esa seccion.';
 } elseif ($motivo === 'logout') {
     $error = '';
+}
+
+if (isset($_GET['activado']) && $_GET['activado'] === '1') {
+    $ok = 'Cuenta activada correctamente, ya puedes iniciar sesion.';
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -117,6 +122,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php if ($error !== ''): ?>
                     <div class="alert alert-danger" role="alert"><?= e($error) ?></div>
                 <?php endif; ?>
+                <?php if ($ok !== ''): ?>
+                    <div class="alert alert-success" role="alert"><?= e($ok) ?></div>
+                <?php endif; ?>
 
                 <form method="POST" action="login.php" autocomplete="off">
                     <?= csrf_field() ?>
@@ -139,6 +147,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="login-extra">
                     <a href="recuperar-password.php">Olvide mi contrasena</a>
                     <a href="solicitud-matricula.php">Solicitar matricula</a>
+                </div>
+                <div class="login-extra-2">
+                    <a href="activar-cuenta.php">¿Es tu primera vez? Activa tu cuenta aqui</a>
                 </div>
             </div>
         </div>
