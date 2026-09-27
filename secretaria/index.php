@@ -13,6 +13,6 @@ auth_check_rol('Secretaria');
     <h1>Panel de Secretaria</h1>
     <p>Hola, <strong><?= e($_SESSION['usuario']['nombre']) ?></strong> (rol: <?= e($_SESSION['usuario']['rol']) ?>).</p>
     <p>Sesion iniciada correctamente. Esta pagina valida que <code>auth_check_rol('Secretaria')</code> funciona.</p>
-    <a href="logout.php" class="btn btn-danger">Cerrar sesion</a>
+    <a href="/sistema_matricula_CSG/logout.php" class="btn btn-danger">Cerrar sesion</a>
 </body>
 </html>
