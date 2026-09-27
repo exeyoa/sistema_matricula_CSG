@@ -1,0 +1,78 @@
+.campo-cedula {
+    display: flex;
+    gap: 0.5rem;
+    align-items: stretch;
+    width: 100%;
+}
+
+.campo-cedula select,
+.campo-cedula input {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 0.7rem 0.6rem;
+    border: 1.5px solid #d6e4ee;
+    border-radius: 8px;
+    background: #f4f8fb;
+    font-family: inherit;
+    font-size: 0.9rem;
+    color: #0f3460;
+    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.campo-cedula select {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='%231a8cb8' d='M8 11L3 6h10z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    background-size: 14px;
+    padding-right: 1.6rem;
+    cursor: pointer;
+}
+
+.campo-cedula .cedula-libro,
+.campo-cedula .cedula-tomo {
+    text-align: center;
+    font-weight: 500;
+}
+
+.campo-cedula select:focus,
+.campo-cedula input:focus {
+    outline: none;
+    border-color: #1a8cb8;
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(26, 140, 184, 0.12);
+}
+
+.campo-cedula.invalid select,
+.campo-cedula.invalid input {
+    border-color: #b3261e;
+    background: #fde8ea;
+}
+
+.cedula-error {
+    display: none;
+    width: 100%;
+    color: #b3261e;
+    font-size: 0.82rem;
+    margin-top: 0.4rem;
+}
+
+.campo-cedula.invalid .cedula-error {
+    display: block;
+}
+
+@media (max-width: 600px) {
+    .campo-cedula {
+        flex-wrap: wrap;
+    }
+    .campo-cedula select,
+    .campo-cedula input {
+        flex-basis: calc(50% - 0.25rem);
+    }
+    .campo-cedula .cedula-libro,
+    .campo-cedula .cedula-tomo {
+        flex-basis: calc(50% - 0.25rem);
+    }
+}

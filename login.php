@@ -89,6 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/login.css">
+    <link rel="stylesheet" href="assets/css/cedula.css">
 </head>
 <body>
     <div class="login-wrapper">
@@ -129,8 +130,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <form method="POST" action="login.php" autocomplete="off">
                     <?= csrf_field() ?>
                     <div class="mb-3">
-                        <label for="cedula" class="form-label">Cedula</label>
-                        <input type="text" class="form-control" id="cedula" name="cedula" value="<?= e($cedulaOld) ?>" required autofocus>
+                        <label class="form-label">Cedula</label>
+                        <?php $name = 'cedula'; $value = $cedulaOld; include __DIR__ . '/includes/campo-cedula.php'; ?>
                     </div>
                     <div class="mb-3">
                         <label for="contrasena" class="form-label">Contrasena</label>
@@ -156,5 +157,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <script src="assets/js/login.js"></script>
+    <script src="assets/js/cedula.js"></script>
 </body>
 </html>
