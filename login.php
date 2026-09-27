@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once __DIR__ . '/includes/auth.php';
 
 if (auth_user()) {
@@ -81,73 +81,64 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Matricula - Colegio Secundario de Guabito</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/login.css">
 </head>
 <body>
-    <div class="login-page">
-        <div class="login-card">
-            <div class="login-left">
-                <div class="carrusel" aria-hidden="true">
-                    <div class="carrusel-slide active" data-slide="0"></div>
-                    <div class="carrusel-slide" data-slide="1"></div>
-                    <div class="carrusel-slide" data-slide="2"></div>
-                    <div class="carrusel-slide" data-slide="3"></div>
-                    <div class="carrusel-slide" data-slide="4"></div>
-                </div>
-                <div class="carrusel-overlay" aria-hidden="true"></div>
-
-                <div class="login-left-content">
-                    <i class="bi bi-mortarboard-fill icono-birrete-blanco" aria-hidden="true"></i>
-                    <h1>Sistema de<br>Matr&iacute;cula</h1>
-                    <p class="frase-motivacional">Tu futuro comienza con<br>una buena educaci&oacute;n</p>
-                </div>
-
-                <div class="carrusel-dots" role="tablist" aria-label="Selector de imagen de fondo">
-                    <button type="button" class="dot active" data-index="0" aria-label="Imagen 1"></button>
-                    <button type="button" class="dot" data-index="1" aria-label="Imagen 2"></button>
-                    <button type="button" class="dot" data-index="2" aria-label="Imagen 3"></button>
-                    <button type="button" class="dot" data-index="3" aria-label="Imagen 4"></button>
-                    <button type="button" class="dot" data-index="4" aria-label="Imagen 5"></button>
-                </div>
-
-                <svg class="curva-decorativa" viewBox="0 0 80 600" preserveAspectRatio="none" aria-hidden="true">
-                    <path d="M0,0 C40,150 60,300 40,450 C20,540 50,580 80,600 L80,0 Z" fill="rgba(26,140,184,0.85)"/>
-                </svg>
+    <div class="login-wrapper">
+        <div class="login-left">
+            <div class="carrusel" aria-hidden="true">
+                <div class="carrusel-slide active" data-slide="0"></div>
+                <div class="carrusel-slide" data-slide="1"></div>
+                <div class="carrusel-slide" data-slide="2"></div>
+                <div class="carrusel-slide" data-slide="3"></div>
+                <div class="carrusel-slide" data-slide="4"></div>
             </div>
+            <div class="carrusel-overlay" aria-hidden="true"></div>
+            <div class="login-brand">
+                <div class="logo-placeholder">CSG</div>
+                <h1>Colegio Secundario<br>de Guabito</h1>
+                <p class="motivacional">"Educar es plantar un arbol que dara sombra a muchas generaciones"</p>
+            </div>
+            <div class="carrusel-dots" role="tablist" aria-label="Selector de imagen">
+                <button type="button" class="dot active" data-index="0" aria-label="Imagen 1"></button>
+                <button type="button" class="dot" data-index="1" aria-label="Imagen 2"></button>
+                <button type="button" class="dot" data-index="2" aria-label="Imagen 3"></button>
+                <button type="button" class="dot" data-index="3" aria-label="Imagen 4"></button>
+                <button type="button" class="dot" data-index="4" aria-label="Imagen 5"></button>
+            </div>
+        </div>
+        <div class="login-right">
+            <div class="login-form-container">
+                <h2>Sistema de Matricula</h2>
+                <p class="subtitulo">Inicia sesion para continuar</p>
 
-            <div class="login-right">
-                <div class="login-right-content">
-                    <i class="bi bi-mortarboard-fill icono-birrete-azul" aria-hidden="true"></i>
-                    <h2>Sistema de Matr&iacute;cula</h2>
-                    <p class="subtitulo-instituto">Instituto Profesional y T&eacute;cnico<br>Bocas del Toro</p>
+                <?php if ($error !== ''): ?>
+                    <div class="alert alert-danger" role="alert"><?= e($error) ?></div>
+                <?php endif; ?>
 
-                    <?php if ($error !== ''): ?>
-                        <div class="alert-login" role="alert"><?= e($error) ?></div>
-                    <?php endif; ?>
-
-                    <form method="POST" action="login.php" autocomplete="off" class="login-form">
-                        <?= csrf_field() ?>
-
-                        <div class="campo-login">
-                            <i class="bi bi-person-fill icono-campo" aria-hidden="true"></i>
-                            <input type="text" id="cedula" name="cedula" placeholder="Ingresa tu c&eacute;dula" value="<?= e($cedulaOld) ?>" required autofocus>
-                        </div>
-
-                        <div class="campo-login">
-                            <i class="bi bi-lock-fill icono-campo" aria-hidden="true"></i>
-                            <input type="password" id="contrasena" name="contrasena" placeholder="Ingresa tu contraseña" required>
-                            <button type="button" class="toggle-password" aria-label="Mostrar contrasena">
+                <form method="POST" action="login.php" autocomplete="off">
+                    <?= csrf_field() ?>
+                    <div class="mb-3">
+                        <label for="cedula" class="form-label">Cedula</label>
+                        <input type="text" class="form-control" id="cedula" name="cedula" value="<?= e($cedulaOld) ?>" required autofocus>
+                    </div>
+                    <div class="mb-3">
+                        <label for="contrasena" class="form-label">Contrasena</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="contrasena" name="contrasena" required>
+                            <button type="button" class="btn btn-outline-secondary toggle-password" aria-label="Mostrar contrasena">
                                 <i class="bi bi-eye-fill" aria-hidden="true"></i>
                             </button>
                         </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+                </form>
 
-                        <button type="submit" class="btn-login">Iniciar sesi&oacute;n</button>
-                    </form>
-
-                    <a href="recuperar-password.php" class="link-recuperar">&iquest;Olvidaste tu contraseña?</a>
-
-                    <p class="footer-login">&copy; 2025. Todos los derechos reservados.</p>
+                <div class="login-extra">
+                    <a href="recuperar-password.php">Olvide mi contrasena</a>
+                    <a href="solicitud-matricula.php">Solicitar matricula</a>
                 </div>
             </div>
         </div>
