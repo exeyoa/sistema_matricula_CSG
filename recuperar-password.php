@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/includes/auth.php';
+require_once __DIR__ . '/config/correo.php';
 
 if (auth_user()) {
     auth_redirect_by_role();
@@ -41,8 +42,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $ins->execute([':id' => $user['id_usuario'], ':t' => $token, ':e' => $expira]);
 
         $link = 'http://localhost/sistema_matricula_CSG/recuperar-password.php?step=2&token=' . $token;
-        flash_set('rec_ok', 'Se genero un enlace de recuperacion. En produccion se enviara por email.');
-        flash_set('rec_link', $link);
+
+        $correoSql = 'SELECT correo FROM estudiante WHERE id_usuario = :id AND correo IS NOT NULL AND correo <> "" LIMIT 1
+                      UNION
+                      SELECT correo FROM profesor   WHERE id_usuario = :id AND correo IS NOT NULL AND correo <> "" LIMIT 1';
+        $correoStmt = $pdo->prepare($correoSql);
+        $correoStmt->execute([':id' => $user['id_usuario']]);
+        $correo = (string) ($correoStmt->fetchColumn() ?: '');
+
+        $enviado = false;
+        if ($correo !== '') {
+            $stmtNombre = $pdo->prepare('SELECT nombre, apellido FROM usuario WHERE id_usuario = :id LIMIT 1');
+            $stmtNombre->execute([':id' => $user['id_usuario']]);
+            $u = $stmtNombre->fetch();
+            $nombreCompleto = trim(($u['nombre'] ?? '') . ' ' . ($u['apellido'] ?? ''));
+            $enviado = enviarCorreoRecuperacion($correo, $nombreCompleto, $link);
+        }
+
+        if ($enviado) {
+            flash_set('rec_ok', 'Si la cedula existe, te enviamos un enlace de recuperacion al correo registrado.');
+        } else {
+            flash_set('rec_ok', 'Si la cedula existe, te enviamos un enlace de recuperacion. Si no puedes abrir el del correo, usa este enlace temporal:');
+            flash_set('rec_link', $link);
+        }
+
         header('Location: recuperar-password.php?step=1');
         exit;
     }
