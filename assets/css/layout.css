@@ -1,0 +1,247 @@
+:root {
+    --color-azul-oscuro: #0f3460;
+    --color-azul-med:    #143b6e;
+    --color-azul-claro:  #1a8cb8;
+    --color-turquesa:    #25b3c4;
+    --color-fondo:       #f3f6fa;
+    --color-texto:       #1f2d3d;
+    --color-texto-suave: #6b7a8c;
+    --color-blanco:      #ffffff;
+    --color-borde:       #e3e9f0;
+    --sombra-sm:         0 2px 6px rgba(15, 52, 96, 0.06);
+    --sombra-md:         0 8px 24px rgba(15, 52, 96, 0.08);
+    --radio:             12px;
+    --sidebar-w:         260px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+    background: var(--color-fondo);
+    color: var(--color-texto);
+    min-height: 100vh;
+}
+
+body.layout {
+    padding-left: var(--sidebar-w);
+}
+
+a { text-decoration: none; color: inherit; }
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-w);
+    height: 100vh;
+    background: linear-gradient(180deg, var(--color-azul-oscuro) 0%, var(--color-azul-med) 100%);
+    color: var(--color-blanco);
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem 0.75rem;
+    box-shadow: var(--sombra-md);
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-avatar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem 1.25rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 0.75rem;
+}
+
+.avatar-circulo {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--color-azul-claro);
+    color: var(--color-blanco);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    flex-shrink: 0;
+    letter-spacing: 0.5px;
+}
+
+.avatar-info { min-width: 0; }
+.avatar-nombre { font-weight: 600; font-size: 0.9rem; line-height: 1.2; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.avatar-rol   { font-size: 0.75rem; opacity: 0.75; margin-top: 0.15rem; }
+
+.sidebar-menu {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.25rem 0;
+}
+
+.sidebar-menu::-webkit-scrollbar { width: 6px; }
+.sidebar-menu::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.7rem 0.85rem;
+    border-radius: 8px;
+    color: rgba(255,255,255,0.85);
+    font-size: 0.92rem;
+    font-weight: 500;
+    margin-bottom: 0.15rem;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-link i { font-size: 1.1rem; width: 20px; text-align: center; }
+
+.sidebar-link:hover {
+    background: rgba(255,255,255,0.08);
+    color: var(--color-blanco);
+}
+
+.sidebar-link.active {
+    background: var(--color-azul-claro);
+    color: var(--color-blanco);
+    box-shadow: 0 4px 12px rgba(26, 140, 184, 0.4);
+}
+
+.sidebar-link.logout { color: rgba(255,255,255,0.7); }
+.sidebar-link.logout:hover { background: rgba(220, 53, 69, 0.25); color: var(--color-blanco); }
+
+.sidebar-footer {
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.sidebar-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+}
+
+.app-header {
+    background: var(--color-blanco);
+    border-bottom: 1px solid var(--color-borde);
+    padding: 0.85rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: var(--sombra-sm);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.hamburger {
+    display: none;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--color-azul-oscuro);
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+}
+
+.hamburger:hover { background: var(--color-fondo); }
+
+.app-header-titulo { flex: 1; }
+.app-header-titulo h1 { font-size: 1.35rem; margin: 0; color: var(--color-azul-oscuro); font-weight: 700; }
+.app-header-fecha { font-size: 0.8rem; color: var(--color-texto-suave); margin-top: 0.1rem; display: block; }
+
+.campana {
+    background: transparent;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: var(--color-azul-oscuro);
+    font-size: 1.2rem;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+}
+
+.campana:hover { background: var(--color-fondo); }
+
+.campana-badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: #dc3545;
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 700;
+    border-radius: 10px;
+    padding: 1px 5px;
+    min-width: 16px;
+    text-align: center;
+}
+
+.saludo {
+    padding: 1rem 1.5rem 0.25rem;
+    font-size: 1.05rem;
+    color: var(--color-azul-oscuro);
+}
+
+.contenido-pagina {
+    padding: 1rem 1.5rem 2rem;
+}
+
+.placeholder-card {
+    background: var(--color-blanco);
+    border-radius: var(--radio);
+    padding: 2rem;
+    box-shadow: var(--sombra-sm);
+    border: 1px solid var(--color-borde);
+}
+
+.placeholder-card h2 {
+    color: var(--color-azul-oscuro);
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+.placeholder-card p {
+    color: var(--color-texto);
+    line-height: 1.6;
+    margin: 0.5rem 0;
+}
+
+.placeholder-card strong {
+    color: var(--color-azul-oscuro);
+}
+
+.placeholder-card code {
+    background: var(--color-fondo);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: var(--color-azul-oscuro);
+}
+
+@media (max-width: 900px) {
+    body.layout { padding-left: 0; }
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    .sidebar.open { transform: translateX(0); }
+    .sidebar-backdrop.show { display: block; }
+    .hamburger { display: inline-flex; align-items: center; justify-content: center; }
+    .app-header { padding: 0.75rem 1rem; }
+    .app-header-titulo h1 { font-size: 1.1rem; }
+    .app-header-fecha { display: none; }
+    .saludo { padding: 0.75rem 1rem 0.25rem; font-size: 0.95rem; }
+    .contenido-pagina { padding: 0.75rem 1rem 1.5rem; }
+}
