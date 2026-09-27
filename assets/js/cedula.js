@@ -24,7 +24,12 @@
                     hidden.value = '';
                     return false;
                 }
-                var prefix = (tipo !== '00') ? tipo : prov;
+                var prefix;
+                if (tipo !== '00') {
+                    prefix = tipo;
+                } else {
+                    prefix = (prov.length === 2 && prov.charAt(0) === '0') ? prov.charAt(1) : prov;
+                }
                 hidden.value = prefix + '-' + libro + '-' + tomo;
                 return true;
             }
@@ -56,7 +61,12 @@
                 if (parts.length === 3) {
                     var prefix = parts[0];
                     if (/^\d+$/.test(prefix)) {
-                        selectProv.value = prefix;
+                        var provNorm = (prefix.length === 1) ? '0' + prefix : prefix;
+                        var found = false;
+                        for (var i = 0; i < selectProv.options.length; i++) {
+                            if (selectProv.options[i].value === provNorm) { selectProv.selectedIndex = i; found = true; break; }
+                        }
+                        if (!found) selectProv.value = provNorm;
                     } else {
                         selectTipo.value = prefix;
                     }
