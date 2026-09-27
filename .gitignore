@@ -56,3 +56,6 @@ yarn.lock
 
 # --- Exportar a PDF / reportes generados ------------------------------
 /exports/
+# Screenshots temporales de debug
+*.png
+
